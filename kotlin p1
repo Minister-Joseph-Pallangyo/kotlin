@@ -1,0 +1,34 @@
+fun main() {
+    // User data class to hold phone and battery information
+    data class User(val name: String, var batteryPercentage: Int)
+
+    // Function to transfer charge from one user to another
+    fun transferCharge(sender: User, receiver: User, amount: Int): Boolean {
+        return if (sender.batteryPercentage >= amount) {
+            sender.batteryPercentage -= amount
+            receiver.batteryPercentage += amount
+            println("${sender.name} transferred $amount% battery to ${receiver.name}.")
+            println("${sender.name}'s remaining battery: ${sender.batteryPercentage}%")
+            println("${receiver.name}'s current battery: ${receiver.batteryPercentage}%")
+            true
+        } else {
+            println("${sender.name} does not have enough battery to transfer.")
+            false
+        }
+    }
+
+    // Initializing users with their respective battery percentages
+    val user1 = User("Alice", 80)
+    val user2 = User("Bob", 40)
+
+    // Display initial battery status
+    println("${user1.name}'s initial battery: ${user1.batteryPercentage}%")
+    println("${user2.name}'s initial battery: ${user2.batteryPercentage}%")
+
+    // Amount of battery to be transferred
+    val transferAmount = 20
+
+    // Attempt to transfer charge from user1 to user2
+    println("\nAttempting to transfer $transferAmount% battery from ${user1.name} to ${user2.name}...\n")
+    transferCharge(user1, user2, transferAmount)
+}
